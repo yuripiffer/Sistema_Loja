@@ -1,31 +1,27 @@
 import pandas as pd
+from datetime import datetime
+
+
+listaProduto = ['1', '4', 'b6bb', '1c23', 'e15d', 'e15d']
 
 
 def pagamento(listaProduto):
     valorCompra = calcularListaProdutos(listaProduto)
     print("FINALIZAÇÃO DE COMPRA\n"
           f"Valor atual da compra: R${valorCompra}")
-
     opcao = "0"
     while opcao != "3":
         opcao = input("SISTEMA DE PAGAMENTO\n"
                       "Opções de pagamento:\n"
                       "\t1 -> Dinheiro\n"
                       "\t2 -> Cartão de débito\n"
-                      "\t3 -> Sair\n"
-                      " Opção: ")
-        print(opcao)
+                      "\t3 -> Sair\n")
         if opcao == "1":
-            print("CÁLCULO DE TROCO:")
-            print(f"Valor total da compra: R${valorCompra}")
-            dinheiroCliente = float(input("Insira o valor entregue pelo cliente:"))
-            troco = float(dinheiroCliente - valorCompra)
-            print(f"Troco a ser entregue para o cliente: R$ {troco}\n")
-            # COMPUTAR COMO COMPRA REALIZADA NO HISTÓRICO DE COMPRA
+            compraDinheiro(valorCompra)
+            inserirHistoricoCompra(listaProduto)
         elif opcao == "2":
-            novoSaldoCartao = compraCartao(valorCompra)
-
-            # COMPUTAR COMO COMPRA REALIZADA NO HISTÓRICO DE COMPRA
+            compraCartao(valorCompra)
+            inserirHistoricoCompra(listaProduto)
         elif opcao == "3":
             pass
 
@@ -41,14 +37,18 @@ def calcularListaProdutos(listaProduto):
     return valorCompra
 
 
+def compraDinheiro(valorCompra):
+    print("CÁLCULO DE TROCO:")
+    print(f"Valor total da compra: R${valorCompra}")
+    dinheiroCliente = float(input("Insira o valor entregue pelo cliente:"))
+    troco = float(dinheiroCliente - valorCompra)
+    print(f"Troco a ser entregue para o cliente: R$ {troco}\n")
+    # COMPUTAR COMO COMPRA REALIZADA NO HISTÓRICO DE COMPRA
+
+
 def compraCartao(valorCompra):
     df = pd.read_csv("DadosCartao.csv", delimiter=";")
     df.set_index('N_Cartao', inplace=True)
-
-    # nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
-    # while nCartao not in df.index:
-    #     print("Número de cartão não encontrado")
-    #     nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
 
     while True:
         try:
@@ -84,5 +84,20 @@ def compraCartao(valorCompra):
         novoSaldoCartao = saldo - valorCompra
         print("Compra realizada!\n"
               f"Novo saldo do cartão: R${novoSaldoCartao}\n")
-        return novoSaldoCartao
-        # INPUTAR ESSE VALOR NA TABELA (LUCAS...)
+
+        df.loc[[nCartao], ["Saldo"]] = novoSaldoCartao
+        df.to_csv("DadosCartao.csv", sep=";")
+
+
+def inserirHistoricoCompra(listaProduto):
+    df = pd.read_csv("Produto.csv", delimiter=";")
+    df.set_index('Codigo_Produto', inplace=True)
+    dataCompra = datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
+    for codigoProduto in listaProduto:
+        nomeProduto = df.loc[[codigoProduto], ["Nome_Produto"]].values[0][0]
+        precoProduto = df.loc[[codigoProduto], ["Preco"]].values[0][0]
+        with open("Historico_compras.csv", "a") as f:
+            input_dado = f"{dataCompra};{codigoProduto};{nomeProduto};{precoProduto}\n"
+            f.write(input_dado)
+
+pagamento(listaProduto)
