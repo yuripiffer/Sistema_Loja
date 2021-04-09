@@ -9,13 +9,23 @@ import uuid
 
 def cadastrarCategoria():
     novaCategoria = input("Insira um nova categoria de produto:")
-    with open("Categoria.txt", "a") as f:
+    with open("Categoria.csv", "a") as f:
         input_dado = f"{novaCategoria}\n"
         f.write(input_dado)
     # EXTRA
     #Checar se o usuário gostaria de listar todas as categorias
         #chamar a função de listar categorias
 
+    # df = pd.read_csv("Categoria.csv", delimiter = ";")
+    # print("CATEGORIAS DISPONÍVEIS:")
+    # print(df)
+    # #CHECAR SE A CATEGORIA EXISTE --. BOTAR UM WHILE
+    # criarCategoria = input("Insira o nome da nova categoria a ser criada:")
+    # df
+    #
+    #
+    # df.replace( delCategoria, "None", inplace = True)
+    # df.to_csv("Categoria.csv", sep=";", index=False)
 
 def cadastrarProduto():
     nomeProduto = input("Cadastre o nome do produto:")
@@ -109,15 +119,26 @@ def deletarCategoria():
     df.replace( delCategoria, "None", inplace = True)
     df.to_csv("Categoria.csv", sep=";", index=False)
 
-
-
-deletarCategoria()
-#cadastrar
-# Produto()
-#listarProdutos()
-
-# df = pd.read_csv("Produto.csv", delimiter = ";")
-# df.set_index('Codigo_Produto', inplace= True)
-# #print(df.loc[["3"],["Nome_Produto"]])
-
-#print(df.loc[["3"],['Nome_Produto']].values)
+def area_Produto():
+    opcao = "0"
+    while opcao != "6":
+        opcao = input("\n Area de Produtos:\n"
+                      "1 -> Cadastrar categoria de produto\n"
+                      "2 -> Excluir categoria de produto\n"
+                      "3 -> Cadastrar um novo produto\n"
+                      "4 -> Alterar um produto\n"
+                      "5 -> Excluir um produto\n"
+                      "6 -> Sair\n"
+                      " Opção: ")
+        if opcao == "1":
+            cadastrarCategoria()
+        elif opcao == "2":
+            deletarCategoria()
+        elif opcao == "3":
+            cadastrarProduto()
+        elif opcao == "4":
+            alterarProduto()
+        elif opcao == "5":
+            deletarProduto()
+        elif opcao == "6":
+            pass

@@ -42,5 +42,8 @@ def logar_Cliente():
     else:
         print("Cliente não cadastrado ...")
 
+def vender_Produtos():
+    pass
+
 
 

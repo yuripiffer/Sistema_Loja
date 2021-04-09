@@ -1,5 +1,6 @@
 import areaCliente
 import areaConsulta
+import areaProduto
 
 
 opcao = "0"
@@ -16,7 +17,7 @@ while opcao != "4":
     if opcao == "1":
         areaCliente.area_Cliente()
     elif opcao == "2":
-        pass
+        areaProduto.area_Produto()
     elif opcao == "3":
         areaConsulta.area_Consulta()
     elif opcao == "4":
