@@ -1,4 +1,5 @@
 import pandas as pd
+import areaVendas
 
 
 def cadastro_Cliente():
@@ -31,19 +32,13 @@ def area_Vendas_Cliente():
         if opcao == "1":
             logar_Cliente()
         elif opcao == "2":
-            pass
+            areaVendas.vender_Produtos()
         elif opcao == "3":
             pass
 
 def logar_Cliente():
     cpf_Cliente = input("\n CPF do cliente: ")
     if cpf_Cliente in str(pd.read_csv("Cliente.csv", delimiter=";", dtype=str)["CPF"]):
-        print("Deu certo !!")
+        areaVendas.vender_Produtos()
     else:
         print("Cliente não cadastrado ...")
-
-def vender_Produtos():
-    pass
-
-
-

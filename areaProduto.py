@@ -16,16 +16,6 @@ def cadastrarCategoria():
     #Checar se o usuário gostaria de listar todas as categorias
         #chamar a função de listar categorias
 
-    # df = pd.read_csv("Categoria.csv", delimiter = ";")
-    # print("CATEGORIAS DISPONÍVEIS:")
-    # print(df)
-    # #CHECAR SE A CATEGORIA EXISTE --. BOTAR UM WHILE
-    # criarCategoria = input("Insira o nome da nova categoria a ser criada:")
-    # df
-    #
-    #
-    # df.replace( delCategoria, "None", inplace = True)
-    # df.to_csv("Categoria.csv", sep=";", index=False)
 
 def cadastrarProduto():
     nomeProduto = input("Cadastre o nome do produto:")
