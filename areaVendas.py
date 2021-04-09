@@ -1,4 +1,5 @@
 import pandas as pd
+import Pagamento
 import areaProduto
 
 def vender_Produtos():
@@ -9,9 +10,8 @@ def vender_Produtos():
         opcao = input("\n Menu de vendas:\n"
                       "1 -> Adicionar produto\n"
                       "2 -> Cancelar produto\n"
-                      "3 -> Ver produtos na lista de compras\n"
-                      "4 -> Finalizar compra\n"
-                      "5 -> Cancelar compra\n"
+                      "3 -> Finalizar compra\n"
+                      "4 -> Cancelar compra\n"
                       " Opção: ")
         if opcao == "1":
             areaProduto.listarProdutos()
@@ -40,20 +40,16 @@ def vender_Produtos():
                 else:
                     print("Código de produto não encontrado ...")
         elif opcao == "3":
-            copia = produtosCadastrados.copy()
-            copia.set_index('Codigo_Produto', inplace=True)
-            print("\n")
-            for i in range(len(listaProduto)):
-                print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
+            if len(listaProduto) < 1:
+                print("\n Não há produtos no carrinho ...")
+            else:
+                copia = produtosCadastrados.copy()
+                copia.set_index('Codigo_Produto', inplace=True)
+                print("\n Carrinho de compras: ")
+                for i in range(len(listaProduto)):
+                    print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
                       f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
                       f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
+                Pagamento.pagamento()
         elif opcao == "4":
-            copia = produtosCadastrados.copy()
-            copia.set_index('Codigo_Produto', inplace=True)
-            print("\n")
-            for i in range(len(listaProduto)):
-                print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
-                      f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
-                      f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
-        elif opcao == "5":
             pass
