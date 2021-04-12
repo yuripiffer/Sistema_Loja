@@ -3,7 +3,6 @@ import Pagamento
 import areaProduto
 
 def vender_Produtos():
-
     opcao = "0"
     listaProduto = []
     produtosCadastrados = pd.read_csv("Produto.csv", delimiter=";")
@@ -51,6 +50,7 @@ def vender_Produtos():
                     print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
                       f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
                       f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
-                Pagamento.pagamento()
+                Pagamento.pagamento(listaProduto)
+                break
         elif opcao == "4":
             pass

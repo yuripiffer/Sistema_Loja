@@ -2,9 +2,6 @@ import pandas as pd
 from datetime import datetime
 
 
-listaProduto = ['1c23', 'e15d', 'e15d']
-
-
 def pagamento(listaProduto):
     valorCompra = calcularListaProdutos(listaProduto)
     print("FINALIZAÇÃO DE COMPRA\n"
@@ -100,4 +97,5 @@ def inserirHistoricoCompra(listaProduto):
             input_dado = f"{dataCompra};{codigoProduto};{nomeProduto};{precoProduto}\n"
             f.write(input_dado)
 
-pagamento(listaProduto)
+def consultarHistoricoCompra():
+    print(pd.read_csv("Historico_compras.csv", delimiter=";"))

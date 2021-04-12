@@ -1,32 +1,32 @@
 
-Data;ID_Produto;Nome_Produto;Preco;
-04/09/2021 - 16:19:12;b6bb;Roupa;58,90,
+Data;ID_Produto;Nome_Produto;Preco
+04/09/2021 - 16:19:12;b6bb;Roupa;58,90
 04/09/2021 - 16:19:12;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:19:12;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:19:12;e15d;Roupa_masculina;49,90,
+04/09/2021 - 16:19:12;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:19:12;e15d;Roupa_masculina;49,90
 
-04/09/2021 - 16:21:18;b6bb;Roupa;58,90,
+04/09/2021 - 16:21:18;b6bb;Roupa;58,90
 04/09/2021 - 16:21:18;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:21:18;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:21:18;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:24:09;b6bb;Roupa;58,90,
+04/09/2021 - 16:21:18;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:21:18;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:24:09;b6bb;Roupa;58,90
 04/09/2021 - 16:24:09;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:24:09;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:24:09;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:24:29;b6bb;Roupa;58,90,
+04/09/2021 - 16:24:09;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:24:09;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:24:29;b6bb;Roupa;58,90
 04/09/2021 - 16:24:29;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:24:29;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:24:29;e15d;Roupa_masculina;49,90,
+04/09/2021 - 16:24:29;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:24:29;e15d;Roupa_masculina;49,90
 
-04/09/2021 - 16:27:08;b6bb;Roupa;58,90,
+04/09/2021 - 16:27:08;b6bb;Roupa;58,90
 04/09/2021 - 16:27:08;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:27:08;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:27:08;e15d;Roupa_masculina;49,90,
+04/09/2021 - 16:27:08;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:27:08;e15d;Roupa_masculina;49,90
 
-04/09/2021 - 16:33:07;b6bb;Roupa;58,90,
+04/09/2021 - 16:33:07;b6bb;Roupa;58,90
 04/09/2021 - 16:33:07;1c23;Roupa_feminina;29,90
-04/09/2021 - 16:33:07;e15d;Roupa_masculina;49,90,
-04/09/2021 - 16:33:07;e15d;Roupa_masculina;49,90,
+04/09/2021 - 16:33:07;e15d;Roupa_masculina;49,90
+04/09/2021 - 16:33:07;e15d;Roupa_masculina;49,90
 
 04/09/2021 - 16:44:59;b6bb;Calca;49,90
 04/09/2021 - 16:44:59;1c23;Batom Vermelho;29,90

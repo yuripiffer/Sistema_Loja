@@ -1,5 +1,6 @@
 import cliente
 import areaProduto
+import Pagamento
 
 def area_Consulta():
     opcao = "0"
@@ -18,6 +19,6 @@ def area_Consulta():
         elif opcao == "3":
             areaProduto.listarCategorias()
         elif opcao == "4":
-            pass
+            Pagamento.consultarHistoricoCompra()
         elif opcao == "5":
             pass
