@@ -3,9 +3,17 @@ import uuid
 
 
 def cadastrarCategoria():
-    novaCategoria = input("Insira um nova categoria de produto:")
+    while True:
+        novaCategoria = input("Insira uma nova categoria de produto:")
+        if novaCategoria.replace(" ", "") == "" or len(novaCategoria) > 30:
+            print("Nome de categoria inválido ...")
+        elif novaCategoria in str(pd.read_csv("Categoria.csv", dtype=str)):
+            print("Categoria já registrada ...")
+        else:
+            print("Categoria registrada !!")
+            break
     with open("Categoria.csv", "a") as f:
-        input_dado = f"{novaCategoria}\n"
+        input_dado = f"{novaCategoria.upper()}\n"
         f.write(input_dado)
     # EXTRA
     # Checar se o usuário gostaria de listar todas as categorias
@@ -14,12 +22,21 @@ def cadastrarCategoria():
 
 
 def cadastrarProduto():
-    nomeProduto = input("Cadastre o nome do produto:")
+
+    while True:
+        nomeProduto = input("Cadastre o nome do produto:")
+        if nomeProduto.replace(" ", "") == "":
+            print ("Nome de produto inválido ...")
+        else:
+            break
     idProduto = str(uuid.uuid4())[0:4]
     categoriaProduto = inputCategoria()
-    precoProduto = input("Insira o preço do produto {}:".format(nomeProduto))
-    # questões relacionadas a vírgulas etc
-
+    while True:
+        precoProduto = input("Insira o preço do produto {}:".format(nomeProduto))
+        if not precoProduto.replace(",", "").isdigit() or int(precoProduto) <= 0:
+            print("Preço de produto inválido ...")
+        else:
+            break
     with open("Produto.csv", "a") as f:
         input_dado = f"{idProduto};{nomeProduto};{categoriaProduto};{precoProduto}\n"
         f.write(input_dado)
