@@ -141,8 +141,16 @@ def deletarCategoria():
         except:
             print("A categoria não foi encontrada.")
         else:
+            # MODIFICA O CSV DE CATEGORIAS
             df.replace(delCategoria, "None", inplace=True)
             df.to_csv("Categoria.csv", sep=";", index=False)
+
+            #MODIFICA O CSV DE PRODUTO
+            df2 = pd.read_csv("Produto.csv", delimiter=";")
+            df2.set_index('Codigo_Produto', inplace=True)
+            df2.Categoria_Produto.replace(delCategoria, "None", inplace=True)
+            df2.to_csv("Produto.csv", sep=";")
+
             print(f"Categoria {delCategoria} substituída por 'None'")
             break
 
