@@ -36,9 +36,10 @@ def cadastro_Cliente():
 def consulta_Cliente():
     print(pd.read_csv("Cliente.csv", delimiter=";", dtype=str))
 
+
 def area_Vendas_Cliente():
     opcao = 0
-    while opcao != "3":
+    while True:
         opcao = input("\n Area de vendas:\n"
                       "1 -> Comprar como cliente (4% desc)\n"
                       "2 -> Comprar como desconhecido\n"
@@ -49,8 +50,10 @@ def area_Vendas_Cliente():
             logar_Cliente()
         elif opcao == "2":
             areaVendas.vender_Produtos()
+            break
         elif opcao == "3":
-            pass
+            break
+
 
 def logar_Cliente():
     cpf_Cliente = input("\n CPF do cliente: ")

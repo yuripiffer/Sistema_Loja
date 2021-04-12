@@ -2,6 +2,7 @@ import pandas as pd
 import Pagamento
 import areaProduto
 
+
 def vender_Produtos():
     opcao = "0"
     listaProduto = []
@@ -30,9 +31,9 @@ def vender_Produtos():
                 copia.set_index('Codigo_Produto', inplace=True)
                 print("\n")
                 for i in range(len(listaProduto)):
-                    print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]],['Nome_Produto']].values[0][0]}\t"
-                            f"{copia.loc[[listaProduto[i]],['Categoria_Produto']].values[0][0]}\t"
-                               f"{copia.loc[[listaProduto[i]],['Preco']].values[0][0]}")
+                    print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
+                          f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
+                          f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
                 removerProduto = input("\n Digite o código do produto que deseja remover: ")
                 if removerProduto in listaProduto:
                     print("Produto removido !!")
@@ -45,11 +46,13 @@ def vender_Produtos():
             else:
                 copia = produtosCadastrados.copy()
                 copia.set_index('Codigo_Produto', inplace=True)
-                print("\n Carrinho de compras: ")
+                print("--------------------------------")
+                print(" Carrinho de compras:\n ")
                 for i in range(len(listaProduto)):
                     print(f"{listaProduto[i]}\t{copia.loc[[listaProduto[i]], ['Nome_Produto']].values[0][0]}\t"
-                      f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
-                      f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
+                          f"{copia.loc[[listaProduto[i]], ['Categoria_Produto']].values[0][0]}\t"
+                          f"{copia.loc[[listaProduto[i]], ['Preco']].values[0][0]}")
+                print("--------------------------------")
                 Pagamento.pagamento(listaProduto)
                 break
         elif opcao == "4":

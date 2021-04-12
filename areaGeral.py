@@ -2,18 +2,16 @@ import areaCliente
 import areaConsulta
 import areaProduto
 
-
-opcao = "0"
-while opcao != "4":
+while True:
     opcao = input("\n =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
-                      "  Bem vinddo a loja da dona maria !!\n"
-                      " -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n"
-                      " Opções:\n"
-                      "1 -> Clientes:\n"
-                      "2 -> Produtos:\n"
-                      "3 -> Consultas:\n"
-                      "4 -> Sair\n"
-                      " Opção: ")
+                  "  Bem vindo a loja da dona maria !!\n"
+                  " -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n"
+                  " Opções:\n"
+                  "1 -> Clientes:\n"
+                  "2 -> Produtos:\n"
+                  "3 -> Consultas:\n"
+                  "4 -> Sair\n"
+                  " Opção: ")
     if opcao == "1":
         areaCliente.area_Cliente()
     elif opcao == "2":
@@ -22,3 +20,4 @@ while opcao != "4":
         areaConsulta.area_Consulta()
     elif opcao == "4":
         print("Encerrando sessão ...")
+        break

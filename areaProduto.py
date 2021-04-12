@@ -15,10 +15,7 @@ def cadastrarCategoria():
     with open("Categoria.csv", "a") as f:
         input_dado = f"{novaCategoria.upper()}\n"
         f.write(input_dado)
-    # EXTRA
-    # Checar se o usuário gostaria de listar todas as categorias
-    # chamar a função de listar categorias
-
+        print(f"Categoria {novaCategoria} cadastrada com sucesso.")
 
 
 def cadastrarProduto():
