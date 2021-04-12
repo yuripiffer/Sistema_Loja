@@ -7,6 +7,7 @@ def cadastrarCategoria():
     with open("Categoria.csv", "a") as f:
         input_dado = f"{novaCategoria}\n"
         f.write(input_dado)
+        print(f"Categoria {novaCategoria} cadastrada com sucesso.")
 
 
 def cadastrarProduto():
