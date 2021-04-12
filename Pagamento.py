@@ -97,5 +97,7 @@ def inserirHistoricoCompra(listaProduto):
             input_dado = f"{dataCompra};{codigoProduto};{nomeProduto};{precoProduto}\n"
             f.write(input_dado)
 
+
 def consultarHistoricoCompra():
     print(pd.read_csv("Historico_compras.csv", delimiter=";"))
+

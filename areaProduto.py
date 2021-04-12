@@ -101,10 +101,17 @@ def deletarCategoria():
     df = pd.read_csv("Categoria.csv", delimiter=";")
     print("CATEGORIAS DISPONÍVEIS:")
     print(df)
-    # CHECAR SE A CATEGORIA EXISTE --. BOTAR UM WHILE
-    delCategoria = input("Insira o nome da categoria a ser deletada:")
-    df.replace(delCategoria, "None", inplace=True)
-    df.to_csv("Categoria.csv", sep=";", index=False)
+    while True:
+        try:
+            delCategoria = input("Insira o nome da categoria a ser deletada:")
+            if delCategoria not in df.values:
+                raise Exception
+        except:
+            print("A categoria não foi encontrada.")
+        else:
+            df.replace(delCategoria, "None", inplace=True)
+            df.to_csv("Categoria.csv", sep=";", index=False)
+            print(f"Categoria {delCategoria} substituída por 'None'")
 
 
 def area_Produto():
