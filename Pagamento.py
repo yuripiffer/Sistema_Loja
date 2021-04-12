@@ -5,7 +5,7 @@ from datetime import datetime
 def pagamento(listaProduto):
     valorCompra = calcularListaProdutos(listaProduto)
     print("FINALIZAÇÃO DE COMPRA\n"
-          f"Valor atual da compra: R${valorCompra}")
+          f"Valor atual da compra: R${valorCompra:.2f}\n")
     opcao = "0"
     while opcao != "3":
         opcao = input("SISTEMA DE PAGAMENTO\n"
@@ -16,9 +16,11 @@ def pagamento(listaProduto):
         if opcao == "1":
             compraDinheiro(valorCompra)
             inserirHistoricoCompra(listaProduto)
+            break
         elif opcao == "2":
             compraCartao(valorCompra)
             inserirHistoricoCompra(listaProduto)
+            break
         elif opcao == "3":
             pass
 
@@ -36,17 +38,15 @@ def calcularListaProdutos(listaProduto):
 
 def compraDinheiro(valorCompra):
     print("CÁLCULO DE TROCO:")
-    print(f"Valor total da compra: R${valorCompra}")
+    print(f"Valor total da compra: R${valorCompra:.2f}\n")
     dinheiroCliente = float(input("Insira o valor entregue pelo cliente:"))
     troco = float(dinheiroCliente - valorCompra)
-    print(f"Troco a ser entregue para o cliente: R$ {troco}\n")
-    # COMPUTAR COMO COMPRA REALIZADA NO HISTÓRICO DE COMPRA
+    print(f"Troco a ser entregue para o cliente: R$ {troco:.2f}\n")
 
 
 def compraCartao(valorCompra):
     df = pd.read_csv("DadosCartao.csv", delimiter=";")
     df.set_index('N_Cartao', inplace=True)
-
     while True:
         try:
             nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
@@ -100,4 +100,3 @@ def inserirHistoricoCompra(listaProduto):
 
 def consultarHistoricoCompra():
     print(pd.read_csv("Historico_compras.csv", delimiter=";"))
-
