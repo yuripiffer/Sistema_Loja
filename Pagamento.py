@@ -58,42 +58,47 @@ def compraCartao(valorCompra):
     df = pd.read_csv("DadosCartao.csv", delimiter=";")
     df.set_index('N_Cartao', inplace=True)
     while True:
+        #verificação dos dados do cartão
         try:
-            nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
-            if nCartao not in df.index:
+            while True:
+                try:
+                    nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
+                    if nCartao not in df.index:
+                        raise Exception
+                    break  # NÃO É IF, NÃO TEM EXCEÇÃO... seria o equivalente ao else
+                except:
+                    print("OPS! Número de cartão não encontrado ou número inserido incorretamente")
+
+            while True:
+                try:
+                    validadeCartao = int(input("Insira a data de validade do cartão (MM/AA, sem '/') :\n"))
+                    if validadeCartao != int(df.loc[[nCartao], ["Validade(mm/yy)"]].values[0][0]):
+                        raise Exception
+                    break
+                except:
+                    print("OPS! Validade de cartão errada ou número inserido incorretamente")
+
+            while True:
+                try:
+                    senhaCartao = int(input("Insira a senha do cartão (3 dígitos):\n"))
+                    if senhaCartao != int(df.loc[[nCartao], ["Senha"]].values[0][0]):
+                        raise Exception
+                    break
+                except:
+                    print("OPS! Senha do cartão errada ou número inserido incorretamente")
+
+            saldo = int(df.loc[[nCartao], ["Saldo"]].values)
+            if saldo < valorCompra:
                 raise Exception
-            break  # NÃO É IF, NÃO TEM EXCEÇÃO... seria o equivalente ao else
         except:
-            print("OPS! Número de cartão não encontrado ou número inserido incorretamente")
+            print("Problemas com saldo do cartão. Tente outro cartão.")
+        else:
+            novoSaldoCartao = saldo - valorCompra
+            print("Compra realizada!\n"
+                  f"Novo saldo do cartão: R${novoSaldoCartao}\n")
 
-    while True:
-        try:
-            validadeCartao = int(input("Insira a data de validade do cartão (MM/AA, sem '/') :\n"))
-            if validadeCartao != int(df.loc[[nCartao], ["Validade(mm/yy)"]].values):
-                raise Exception
-            break
-        except:
-            print("OPS! Validade de cartão errada ou número inserido incorretamente")
-
-    while True:
-        try:
-            senhaCartao = int(input("Insira a senha do cartão (3 dígitos):\n"))
-            if senhaCartao != int(df.loc[[nCartao], ["Senha"]].values):
-                raise Exception
-            break
-        except:
-            print("OPS! Senha do cartão errada ou número inserido incorretamente")
-
-    saldo = int(df.loc[[nCartao], ["Saldo"]].values)
-    if saldo < valorCompra:
-        print("Saldo insuficiente.")
-    else:
-        novoSaldoCartao = saldo - valorCompra
-        print("Compra realizada!\n"
-              f"Novo saldo do cartão: R${novoSaldoCartao}\n")
-
-        df.loc[[nCartao], ["Saldo"]] = novoSaldoCartao
-        df.to_csv("DadosCartao.csv", sep=";")
+            df.loc[[nCartao], ["Saldo"]] = novoSaldoCartao
+            df.to_csv("DadosCartao.csv", sep=";")
 
 
 def inserirHistoricoCompra(listaProduto):
