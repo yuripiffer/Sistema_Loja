@@ -29,14 +29,18 @@ def cadastrarProduto():
     idProduto = str(uuid.uuid4())[0:4]
     categoriaProduto = inputCategoria()
     while True:
-        precoProduto = input("Insira o preço do produto {}:".format(nomeProduto))
-        if not precoProduto.replace(",", "").isdigit() or int(precoProduto) <= 0:
-            print("Preço de produto inválido ...")
+        try:
+            precoProduto = float(input(f"Insira o preço do produto: {nomeProduto}:").replace(",", "."))
+            if precoProduto <= 0:
+                raise Exception
+        except:
+            print("Valor informado é incorreto.")
         else:
             break
     with open("Produto.csv", "a") as f:
         input_dado = f"{idProduto};{nomeProduto};{categoriaProduto};{precoProduto}\n"
         f.write(input_dado)
+    print(f"Produto {nomeProduto} cadastrado com sucesso!")
 
 
 def inputCategoria():
@@ -64,27 +68,40 @@ def listarProdutos():
 def alterarProduto():
     df = pd.read_csv("Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
-
+    print("------------------------------------------------------")
+    print(df)
+    print("------------------------------------------------------")
     codigoProduto = input("Insira o código do produto a ser alterado:")
     while codigoProduto not in df.index:  # ["Codigo_Produto"].to_string():
+
         print("Código não encontrado.")
         codigoProduto = input("Insira o código do produto a ser alterado:")
 
     opcao = 0
     while opcao not in [1, 2, 3]:
-        opcao = int(input(""" Insira um dos números abaixo:
+        opcao = int(input(""" Insira uma das opções abaixo:
         1 - para alterar o nome do produto,
         2 - para alterar a categoria do produto,
         3 - para alterar o preço do produto."""))
         if opcao == 1:
-            print(f"O antigo nome do produto é {df.loc[[codigoProduto], ['Nome_Produto']].values}.")
-            novoNomeProduto = input("Insira o novo nome para o produto:")
+            print(f"O antigo nome do produto é {df.loc[[codigoProduto], ['Nome_Produto']].values[0][0]}.")
+            while True:
+                try:
+                    novoNomeProduto = input("Insira o novo nome para o produto:")
+                    if novoNomeProduto.isdigit():
+                        raise Exception
+                    elif len(novoNomeProduto.replace(" ","")) == 0:
+                        raise Exception
+                except:
+                    print("Nome não permitido para produto.")
+                else:
+                    break
             df.loc[[codigoProduto], ['Nome_Produto']] = novoNomeProduto
             df.to_csv("Produto.csv", sep=";")
             print(f"O novo nome do produto é {df.loc[[codigoProduto], ['Nome_Produto']].values}.")
 
         elif opcao == 2:
-            print(f"O antigo nome do produto é {df.loc[[codigoProduto], ['Categoria_Produto']].values}.")
+            print(f"A antiga categoria do produto é {df.loc[[codigoProduto], ['Categoria_Produto']].values}0\n.")
             categoriaProduto = inputCategoria()
             df.loc[[codigoProduto], ['Categoria_Produto']] = categoriaProduto
             df.to_csv("Produto.csv", sep=";")
@@ -102,13 +119,14 @@ def alterarProduto():
 def deletarProduto():
     df = pd.read_csv("Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
+    print(df)
     codigoProduto = input("Insira o código do produto a ser deletado:")
     while codigoProduto not in df.index:
         print("Código não encontrado.")
         codigoProduto = input("Insira o código do produto a ser deletado:")
     df.drop(codigoProduto, inplace=True)
     df.to_csv("Produto.csv", sep=";")
-    # printar o que foi deletado.
+    print(f"Produto excluído! Código: {codigoProduto}")
 
 
 def deletarCategoria():
@@ -126,6 +144,7 @@ def deletarCategoria():
             df.replace(delCategoria, "None", inplace=True)
             df.to_csv("Categoria.csv", sep=";", index=False)
             print(f"Categoria {delCategoria} substituída por 'None'")
+            break
 
 
 def area_Produto():
