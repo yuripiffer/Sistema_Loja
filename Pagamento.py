@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 
-listaProduto = ['1', '4', 'b6bb', '1c23', 'e15d', 'e15d']
+listaProduto = ['1c23', 'e15d', 'e15d']
 
 
 def pagamento(listaProduto):
