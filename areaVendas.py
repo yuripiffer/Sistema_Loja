@@ -3,6 +3,7 @@ import Pagamento
 import areaProduto
 
 def vender_Produtos():
+
     opcao = "0"
     listaProduto = []
     produtosCadastrados = pd.read_csv("Produto.csv", delimiter=";")
