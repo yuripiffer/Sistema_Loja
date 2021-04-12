@@ -6,8 +6,8 @@ def pagamento(listaProduto):
     valorCompra = calcularListaProdutos(listaProduto)
     print("FINALIZAÇÃO DE COMPRA\n"
           f"Valor atual da compra: R${valorCompra:.2f}\n")
-    opcao = "0"
-    while opcao != "3":
+
+    while True:
         opcao = input("SISTEMA DE PAGAMENTO\n"
                       "Opções de pagamento:\n"
                       "\t1 -> Dinheiro\n"
@@ -22,7 +22,7 @@ def pagamento(listaProduto):
             inserirHistoricoCompra(listaProduto)
             break
         elif opcao == "3":
-            pass
+            break
 
 
 def calcularListaProdutos(listaProduto):
@@ -39,9 +39,19 @@ def calcularListaProdutos(listaProduto):
 def compraDinheiro(valorCompra):
     print("CÁLCULO DE TROCO:")
     print(f"Valor total da compra: R${valorCompra:.2f}\n")
-    dinheiroCliente = float(input("Insira o valor entregue pelo cliente:"))
-    troco = float(dinheiroCliente - valorCompra)
-    print(f"Troco a ser entregue para o cliente: R$ {troco:.2f}\n")
+    while True:
+        try:
+            dinheiroCliente = float((input("Insira o valor entregue pelo cliente:").replace(",", '.')))
+            if not isinstance(dinheiroCliente, float):
+                raise Exception
+            elif dinheiroCliente < valorCompra:
+                raise Exception
+        except:
+            print("Valor inserido incorretamente ou menor que a valor de compra do cliente.")
+        else:
+            troco = float(dinheiroCliente - valorCompra)
+            print(f"Troco a ser entregue para o cliente: R$ {troco:.2f}\n")
+            break
 
 
 def compraCartao(valorCompra):
@@ -52,7 +62,7 @@ def compraCartao(valorCompra):
             nCartao = int(input("Insira o número do cartão (4 dígitos):\n"))
             if nCartao not in df.index:
                 raise Exception
-            break  # NÃO É IF, NÃO TEM EXCEÇÃO...
+            break  # NÃO É IF, NÃO TEM EXCEÇÃO... seria o equivalente ao else
         except:
             print("OPS! Número de cartão não encontrado ou número inserido incorretamente")
 
