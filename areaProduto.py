@@ -108,7 +108,12 @@ def alterarProduto():
             print(f"A nova categoria do produto é {df.loc[[codigoProduto], ['Categoria_Produto']].values}.")
         elif opcao == 3:
             print(f"O antigo preço do produto é {df.loc[[codigoProduto], ['Preco']].values}.")
-            novoPrecoProduto = input("Insira o novo preço para o produto:")
+            while True:
+                novoPrecoProduto = input("Insira o novo preço para o produto:")
+                if novoPrecoProduto.replace(",", "").isdigit() and int(novoPrecoProduto).replace(",","") > 0:
+                    break
+                else:
+                    print("Preço de produto inválido ...")
             df.loc[[codigoProduto], ['Preco']] = novoPrecoProduto
             df.to_csv("Produto.csv", sep=";")
             print(f"O novo preço do produto é {df.loc[[codigoProduto], ['Preco']].values}.")

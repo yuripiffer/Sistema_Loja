@@ -41,7 +41,7 @@ def area_Vendas_Cliente():
     opcao = 0
     while True:
         opcao = input("\n Area de vendas:\n"
-                      "1 -> Comprar como cliente (4% desc)\n"
+                      "1 -> Comprar como cliente\n"
                       "2 -> Comprar como desconhecido\n"
                       "3 -> Sair\n"
                       " Opção: ")
