@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 
-listaProduto = ['1', '4', 'b6bb', '1c23', 'e15d', 'e15d']
+#listaProduto = ['1', '4', 'b6bb', '1c23', 'e15d', 'e15d']
 
 
 def pagamento(listaProduto):
@@ -100,4 +100,4 @@ def inserirHistoricoCompra(listaProduto):
             input_dado = f"{dataCompra};{codigoProduto};{nomeProduto};{precoProduto}\n"
             f.write(input_dado)
 
-pagamento(listaProduto)
+#pagamento(listaProduto)
