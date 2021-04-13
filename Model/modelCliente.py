@@ -1,7 +1,7 @@
 import pandas as pd
-import areaVendas
+from Menu import menuVendas
 import cpf_tools
-import string
+
 
 def cadastro_Cliente():
     nome_Cliente = ""
@@ -20,21 +20,21 @@ def cadastro_Cliente():
             print("Idade inválida ...")
             idade_Cliente = ""
     while cpf_Cliente == "":
-        cpf_Cliente = input("CPF: ")
+        cpf_Cliente = (input("CPF: (sem pontos ou traço")).replace(".", "").replace("-", "")
         if not cpf_tools.cpf_str_validation(cpf_Cliente):
             print("CPF inválido ...")
             cpf_Cliente = ""
 
-    if cpf_Cliente in str(pd.read_csv("Cliente.csv", delimiter=";", dtype=str)["CPF"]):
+    if cpf_Cliente in str(pd.read_csv("../DataBase/Cliente.csv", delimiter=";", dtype=str)["CPF"]):
         print("\n CPF já registrado ...")
     else:
-        with open("Cliente.csv", "a") as file:
+        with open("../DataBase/Cliente.csv", "a") as file:
             file.write(f"{cpf_Cliente};{nome_Cliente};{idade_Cliente}\n")
         print("\n Cadastro registrado !!")
 
 
 def consulta_Cliente():
-    print(pd.read_csv("Cliente.csv", delimiter=";", dtype=str))
+    print(pd.read_csv("../DataBase/Cliente.csv", delimiter=";", dtype=str))
 
 
 def area_Vendas_Cliente():
@@ -49,15 +49,23 @@ def area_Vendas_Cliente():
         if opcao == "1":
             logar_Cliente()
         elif opcao == "2":
-            areaVendas.vender_Produtos()
+            menuVendas.vender_Produtos()
             break
         elif opcao == "3":
             break
 
 
 def logar_Cliente():
-    cpf_Cliente = input("\n CPF do cliente: ")
-    if cpf_Cliente in str(pd.read_csv("Cliente.csv", delimiter=";", dtype=str)["CPF"]):
-        areaVendas.vender_Produtos()
-    else:
-        print("Cliente não cadastrado ...")
+    while True:
+        try:
+            cpf_Cliente = (input("\n Insira o CPF do cliente: (sem pontos e traço)")).replace(".", "").replace("-", "")
+            if len(cpf_Cliente) != 11:
+                raise Exception
+            elif cpf_Cliente not in str(pd.read_csv("../DataBase/Cliente.csv", delimiter=";", dtype=str)["CPF"]):
+                raise Exception
+        except:
+            print("OPS! Problemas com a entrada de dados do CPF.")
+        else:
+            nome =
+            # DAR BEM-VINDO AO USUÁRIO
+            menuVendas.vender_Produtos()

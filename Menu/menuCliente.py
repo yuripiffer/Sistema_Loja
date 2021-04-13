@@ -1,4 +1,4 @@
-import cliente
+from Model import modelCliente
 
 
 def area_Cliente():
@@ -9,9 +9,9 @@ def area_Cliente():
                       "3 -> Sair\n"
                       " Opção:  ")
         if opcao == "1":
-            cliente.cadastro_Cliente()
+            modelCliente.cadastro_Cliente()
         elif opcao == "2":
-            cliente.area_Vendas_Cliente()
+            modelCliente.area_Vendas_Cliente()
             break
         elif opcao == "3":
             break
