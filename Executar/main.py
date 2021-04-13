@@ -1,6 +1,4 @@
-import areaCliente
-import areaConsulta
-import areaProduto
+from Menu import menuCliente, menuConsulta, menuProduto
 
 while True:
     opcao = input("\n =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
@@ -13,11 +11,11 @@ while True:
                   "4 -> Sair\n"
                   " Opção: ")
     if opcao == "1":
-        areaCliente.area_Cliente()
+        menuCliente.area_Cliente()
     elif opcao == "2":
-        areaProduto.area_Produto()
+        menuProduto.area_Produto()
     elif opcao == "3":
-        areaConsulta.area_Consulta()
+        menuConsulta.area_Consulta()
     elif opcao == "4":
         print("Encerrando sessão ...")
         break

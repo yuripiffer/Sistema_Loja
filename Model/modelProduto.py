@@ -1,5 +1,6 @@
 import pandas as pd
 import uuid
+# import DataBase.DadosCartao.csv
 
 
 def cadastrarCategoria():
@@ -7,23 +8,22 @@ def cadastrarCategoria():
         novaCategoria = input("Insira uma nova categoria de produto:")
         if novaCategoria.replace(" ", "") == "" or len(novaCategoria) > 30:
             print("Nome de categoria inválido ...")
-        elif novaCategoria in str(pd.read_csv("Categoria.csv", dtype=str)):
+        elif novaCategoria in str(pd.read_csv("../DataBase/Categoria.csv", dtype=str)):
             print("Categoria já registrada ...")
         else:
             print("Categoria registrada !!")
             break
-    with open("Categoria.csv", "a") as f:
+    with open("../DataBase/Categoria.csv", "a") as f:
         input_dado = f"{novaCategoria.upper()}\n"
         f.write(input_dado)
         print(f"Categoria {novaCategoria} cadastrada com sucesso.")
 
 
 def cadastrarProduto():
-
     while True:
         nomeProduto = input("Cadastre o nome do produto:")
         if nomeProduto.replace(" ", "") == "":
-            print ("Nome de produto inválido ...")
+            print("Nome de produto inválido ...")
         else:
             break
     idProduto = str(uuid.uuid4())[0:4]
@@ -37,14 +37,14 @@ def cadastrarProduto():
             print("Valor informado é incorreto.")
         else:
             break
-    with open("Produto.csv", "a") as f:
+    with open("../DataBase/Produto.csv", "a") as f:
         input_dado = f"{idProduto};{nomeProduto};{categoriaProduto};{precoProduto}\n"
         f.write(input_dado)
     print(f"Produto {nomeProduto} cadastrado com sucesso!")
 
 
 def inputCategoria():
-    with open("Categoria.csv", "r") as f:
+    with open("../DataBase/Categoria.csv", "r") as f:
         Categorias = f.read()
         print("CATEGORIAS DISPONÍVEIS:")
         print(Categorias)
@@ -56,17 +56,17 @@ def inputCategoria():
 
 
 def listarCategorias():
-    with open("Categoria.csv", "r") as f:
+    with open("../DataBase/Categoria.csv", "r") as f:
         print(f.read())
 
 
 def listarProdutos():
-    Produtos = pd.read_csv("Produto.csv", delimiter=";")
+    Produtos = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
     print(Produtos)
 
 
 def alterarProduto():
-    df = pd.read_csv("Produto.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
     print("------------------------------------------------------")
     print(df)
@@ -90,7 +90,7 @@ def alterarProduto():
                     novoNomeProduto = input("Insira o novo nome para o produto:")
                     if novoNomeProduto.isdigit():
                         raise Exception
-                    elif len(novoNomeProduto.replace(" ","")) == 0:
+                    elif len(novoNomeProduto.replace(" ", "")) == 0:
                         raise Exception
                 except:
                     print("Nome não permitido para produto.")
@@ -110,7 +110,7 @@ def alterarProduto():
             print(f"O antigo preço do produto é {df.loc[[codigoProduto], ['Preco']].values}.")
             while True:
                 novoPrecoProduto = input("Insira o novo preço para o produto:")
-                if novoPrecoProduto.replace(",", "").isdigit() and int(novoPrecoProduto).replace(",","") > 0:
+                if novoPrecoProduto.replace(",", "").isdigit() and int(novoPrecoProduto).replace(",", "") > 0:
                     break
                 else:
                     print("Preço de produto inválido ...")
@@ -122,7 +122,7 @@ def alterarProduto():
 
 
 def deletarProduto():
-    df = pd.read_csv("Produto.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
     print(df)
     codigoProduto = input("Insira o código do produto a ser deletado:")
@@ -135,7 +135,7 @@ def deletarProduto():
 
 
 def deletarCategoria():
-    df = pd.read_csv("Categoria.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/Categoria.csv", delimiter=";")
     print("CATEGORIAS DISPONÍVEIS:")
     print(df)
     while True:
@@ -150,36 +150,11 @@ def deletarCategoria():
             df.replace(delCategoria, "None", inplace=True)
             df.to_csv("Categoria.csv", sep=";", index=False)
 
-            #MODIFICA O CSV DE PRODUTO
-            df2 = pd.read_csv("Produto.csv", delimiter=";")
+            # MODIFICA O CSV DE PRODUTO
+            df2 = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
             df2.set_index('Codigo_Produto', inplace=True)
             df2.Categoria_Produto.replace(delCategoria, "None", inplace=True)
             df2.to_csv("Produto.csv", sep=";")
 
             print(f"Categoria {delCategoria} substituída por 'None'")
             break
-
-
-def area_Produto():
-    opcao = "0"
-    while opcao != "6":
-        opcao = input("\n Area de Produtos:\n"
-                      "1 -> Cadastrar categoria de produto\n"
-                      "2 -> Excluir categoria de produto\n"
-                      "3 -> Cadastrar um novo produto\n"
-                      "4 -> Alterar um produto\n"
-                      "5 -> Excluir um produto\n"
-                      "6 -> Sair\n"
-                      " Opção: ")
-        if opcao == "1":
-            cadastrarCategoria()
-        elif opcao == "2":
-            deletarCategoria()
-        elif opcao == "3":
-            cadastrarProduto()
-        elif opcao == "4":
-            alterarProduto()
-        elif opcao == "5":
-            deletarProduto()
-        elif opcao == "6":
-            pass

@@ -26,7 +26,7 @@ def pagamento(listaProduto):
 
 
 def calcularListaProdutos(listaProduto):
-    df = pd.read_csv("Produto.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
     valorCompra = 0
     for codigoProduto in listaProduto:
@@ -55,7 +55,7 @@ def compraDinheiro(valorCompra):
 
 
 def compraCartao(valorCompra):
-    df = pd.read_csv("DadosCartao.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/DadosCartao.csv", delimiter=";")
     df.set_index('N_Cartao', inplace=True)
     while True:
         #verificação dos dados do cartão
@@ -102,16 +102,16 @@ def compraCartao(valorCompra):
 
 
 def inserirHistoricoCompra(listaProduto):
-    df = pd.read_csv("Produto.csv", delimiter=";")
+    df = pd.read_csv("../DataBase/Produto.csv", delimiter=";")
     df.set_index('Codigo_Produto', inplace=True)
     dataCompra = datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
     for codigoProduto in listaProduto:
         nomeProduto = df.loc[[codigoProduto], ["Nome_Produto"]].values[0][0]
         precoProduto = df.loc[[codigoProduto], ["Preco"]].values[0][0]
-        with open("Historico_compras.csv", "a") as f:
+        with open("../DataBase/Historico_compras.csv", "a") as f:
             input_dado = f"{dataCompra};{codigoProduto};{nomeProduto};{precoProduto}\n"
             f.write(input_dado)
 
 
 def consultarHistoricoCompra():
-    print(pd.read_csv("Historico_compras.csv", delimiter=";"))
+    print(pd.read_csv("../DataBase/Historico_compras.csv", delimiter=";"))

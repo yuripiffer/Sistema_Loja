@@ -1,6 +1,4 @@
-import cliente
-import areaProduto
-import Pagamento
+from Model import modelCliente, modelPagamento, modelProduto
 
 
 def area_Consulta():
@@ -13,12 +11,12 @@ def area_Consulta():
                       "5 -> Sair\n"
                       " Opção: ")
         if opcao == "1":
-            cliente.consulta_Cliente()
+            modelCliente.consulta_Cliente()
         elif opcao == "2":
-            areaProduto.listarProdutos()
+            modelProduto.listarProdutos()
         elif opcao == "3":
-            areaProduto.listarCategorias()
+            modelProduto.listarCategorias()
         elif opcao == "4":
-            Pagamento.consultarHistoricoCompra()
+            modelPagamento.consultarHistoricoCompra()
         elif opcao == "5":
             break
